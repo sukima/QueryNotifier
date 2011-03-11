@@ -3,6 +3,7 @@ require 'bundler/setup'
 
 require 'rake/packagetask'
 require 'rake/clean'
+require 'rake/testtask'
 require 'coffee-script'
 
 Rake::PackageTask.new("QueryNotifier", "0.1.0") do |p|
@@ -12,6 +13,12 @@ Rake::PackageTask.new("QueryNotifier", "0.1.0") do |p|
 end
 
 CLEAN.include("public/javascripts/*.js")
+
+Rake::TestTask.new do |t|
+  t.libs << "test"
+  t.test_files = FileList['test/test*.rb']
+  t.verbose = true
+end
 
 namespace :js do
   desc "compile coffee-scripts from ./src to ./public/javascripts"
@@ -33,4 +40,9 @@ end
 
 desc "Create a deployment bundle"
 task :dist => ["js:compile", :package]
+
+desc "Run the server"
+task :default => "js:compile" do
+  ruby "query_notifier.rb"
+end
 # vim:set et sw=2 ts=8:
