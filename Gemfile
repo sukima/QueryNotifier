@@ -1,5 +1,7 @@
 source :rubygems
 gem 'sinatra'
+gem 'datamapper'
+gem 'dm-sqlite-adapter'
 
 group :development do
   gem 'json'
