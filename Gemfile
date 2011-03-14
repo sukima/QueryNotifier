@@ -2,9 +2,10 @@ source :rubygems
 gem 'sinatra'
 gem 'datamapper'
 gem 'dm-sqlite-adapter'
+gem 'json'
 
 group :development do
-  gem 'json'
+  gem 'rake'
   gem 'therubyracer'
   gem 'coffee-script'
 end
